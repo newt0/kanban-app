@@ -1,9 +1,29 @@
-// Node.jsのrequireスタイルでインポート
 const bodyParser = require('body-parser')
 
-//'Expresss'アプリケーションインスタンスを受け取る関数をエクスポート
+// `Express`アプリケーションインスタンスを受取る関数をエクスポート
 module.exports = app => {
-  // HTTP リクエストのbodyの内容をJSONとして解析するようミドルウェアをインストール
+  // HTTPリクエストのbodyの内容をJSONとして解析するようミドルウェアをインストール
   app.use(bodyParser.json())
-  // TODO: ここ以降にAPIの実装内容を追加していく
+
+  // ユーザー情報
+  const users = {
+    'foo@domain.com': {
+      password: '12345678',
+      userId: 1,
+      token: '1234567890abcdef'
+    }
+  }
+
+  // ログインAPIエンドポイント'/auth/login'
+  app.post('/auth/login', (req, res) => {
+    const { email, password } = req.body
+    const user = users[email]
+    if (user) {
+      if (user.password !== password) {
+        res.status(401).json({ message: 'ログインに失敗しました。' })
+      } else {
+        res.status(404).json({ message: 'ユーザーが登録されていません。' })
+      }
+    }
+  })
 }
