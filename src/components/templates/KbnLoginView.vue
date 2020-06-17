@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import KbnLoginForm from '@/components/molecules/KbnloginForm.vue'
+import KbnLoginForm from '@/components/molecules/KbnLoginForm.vue'
 
 export default {
   name: 'KbnLoginView',

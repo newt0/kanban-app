@@ -1,3 +1,4 @@
+// Node.jsのrequireスタイルでインポート
 const bodyParser = require('body-parser')
 
 // `Express`アプリケーションインスタンスを受取る関数をエクスポート
@@ -14,7 +15,7 @@ module.exports = app => {
     }
   }
 
-  // ログインAPIエンドポイント'/auth/login'
+  // ログインAPIのエンドポイント'/auth/login'
   app.post('/auth/login', (req, res) => {
     const { email, password } = req.body
     const user = users[email]
@@ -22,8 +23,10 @@ module.exports = app => {
       if (user.password !== password) {
         res.status(401).json({ message: 'ログインに失敗しました。' })
       } else {
-        res.status(404).json({ message: 'ユーザーが登録されていません。' })
+        res.json({ userId: user.userId, token: user.token })
       }
+    } else {
+      res.status(404).json({ message: 'ユーザーが登録されていません。' })
     }
   })
 }
