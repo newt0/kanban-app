@@ -1,7 +1,7 @@
 import store from '../store'
 
 export const authorizeToken = (to, from, next) => {
-  if (to.matched.some(record => record.meta.requiredAuth )) {
+  if (to.matched.some(record => record.meta.requiredAuth)) {
     // マッチしたルートにおいて、メタフィールドに`requiresAuth`が付与されている場合は
     // ログインした際に付与される認証トークンがあるかどうかチェックする
     // 注意:
